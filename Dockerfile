@@ -15,7 +15,7 @@ ENV JAVA_HOME /usr/lib/jvm/jre-11
 # The user is in the group 0 to have access to the mounted volumes and storage
 RUN useradd -r -m -u 1001 -g 0 strimzi
 
-ARG strimzi_kafka_bridge_version=1.0-SNAPSHOT
+ARG strimzi_kafka_bridge_version=0.22.0-SNAPSHOT
 ENV STRIMZI_KAFKA_BRIDGE_VERSION ${strimzi_kafka_bridge_version}
 ENV STRIMZI_HOME=/opt/strimzi
 RUN mkdir -p ${STRIMZI_HOME}
