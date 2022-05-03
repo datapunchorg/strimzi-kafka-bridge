@@ -76,4 +76,4 @@ if [ "$JAVA_MAJOR_VERSION" -ge "9" ] ; then
 fi
 
 # starting Kafka Bridge with final configuration
-exec /usr/bin/tini -s -w -e 143 -- "${MYPATH}"/../kafka_bridge_run.sh --config-file=/tmp/kafka-bridge.properties "$@"
+exec /usr/bin/tini -s -w -e 143 -- "${MYPATH}"/../kafka_bridge_run.sh --config-file=/opt/strimzi-kafka-bridge/conf/application.properties "$@"

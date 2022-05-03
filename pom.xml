@@ -322,6 +322,11 @@
 			<artifactId>tomcat-embed-core</artifactId>
 			<version>${tomcat-embed-core.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>software.amazon.msk</groupId>
+			<artifactId>aws-msk-iam-auth</artifactId>
+			<version>1.0.0</version>
+		</dependency>
 		<!-- Testing -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
