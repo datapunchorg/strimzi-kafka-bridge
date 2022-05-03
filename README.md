@@ -17,6 +17,13 @@ Thanks to the bridge, all clients which can speak different standard protocols c
 
 ## Running the bridge
 
+### On Java Development Environment / IntelliJ
+
+Run class `io.strimzi.kafka.bridge.Application` with following arguments:
+```
+--config-file config/application.properties
+```
+
 ### On Kubernetes and OpenShift
 
 You can use the [Strimzi Kafka operator](https://strimzi.io/) to deploy the Kafka Bridge with HTTP support on Kubernetes and OpenShift.
