@@ -25,7 +25,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Publish the Docker image for Spark History Server
+      - name: Build maven project
         run: |
           mvn clean package -DskipTests -Dmaven.javadoc.skip=true
 
@@ -36,7 +36,7 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Publish the Docker image for Spark History Server
+      - name: Publish the Docker image
         run: |
           suffix=$(date +%s)
           docker build -t ghcr.io/datapunchorg/strimzi-kafka-bridge:0.22.0-SNAPSHOT-$suffix .
