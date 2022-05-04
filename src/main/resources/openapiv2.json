@@ -503,6 +503,55 @@
         }
       ]
     },
+    "/topicAdmin/{topicname}": {
+      "post": {
+        "tags": [
+          "Topic"
+        ],
+        "description": "Creates a new topic",
+        "operationId": "createTopic",
+        "produces": [
+          "application/vnd.kafka.v2+json"
+        ],
+        "parameters": [
+          {
+            "name": "topicname",
+            "in": "path",
+            "description": "Name of the topic to send records to or retrieve metadata from.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Request body to create topic.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CreateTopicRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Topic name which is created successfully.",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "description": "Name of the topic",
+                  "type": "string"
+                }
+              }
+            },
+            "examples": {
+              "application/vnd.kafka.v2+json": {
+                "name": "topic1"
+               }
+            }
+          }
+        }
+      }
+    },
     "/topics": {
       "get": {
         "tags": [
@@ -1691,6 +1740,22 @@
             "value": "value2"
           }
         ]
+      }
+    },
+    "CreateTopicRequest": {
+      "title": "CreateTopicRequest",
+      "type": "object",
+      "properties": {
+        "numPartitions": {
+          "description": "Number of partitions",
+          "format": "int32",
+          "type": "integer"
+        },
+        "replicationFactor": {
+          "description": "Replication factor",
+          "format": "int32",
+          "type": "integer"
+        }
       }
     },
     "Topics": {
