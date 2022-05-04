@@ -96,7 +96,7 @@ public abstract class AdminClientEndpoint implements BridgeEndpoint {
      */
     protected void createTopic(String topicName, int numPartitions, int replicationFactor, Handler<AsyncResult<Void>> handler) {
         log.info("Create topic {}", topicName);
-        NewTopic newTopic = new NewTopic(topicName, numPartitions, (short)replicationFactor);
+        NewTopic newTopic = new NewTopic(topicName, numPartitions, (short) replicationFactor);
         this.adminClient.createTopics(Arrays.asList(newTopic), handler);
     }
 
