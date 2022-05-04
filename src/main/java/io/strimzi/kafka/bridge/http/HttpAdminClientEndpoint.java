@@ -62,6 +62,10 @@ public class HttpAdminClientEndpoint extends AdminClientEndpoint {
                 doListTopics(routingContext);
                 break;
 
+            case CREATE_TOPIC:
+                doCreateTopic(routingContext);
+                break;
+
             case GET_TOPIC:
                 doGetTopic(routingContext);
                 break;
@@ -97,6 +101,25 @@ public class HttpAdminClientEndpoint extends AdminClientEndpoint {
                 HttpBridgeError error = new HttpBridgeError(
                         HttpResponseStatus.INTERNAL_SERVER_ERROR.code(),
                         listTopicsResult.cause().getMessage()
+                );
+                HttpUtils.sendResponse(routingContext, HttpResponseStatus.INTERNAL_SERVER_ERROR.code(),
+                        BridgeContentType.KAFKA_JSON, error.toJson().toBuffer());
+            }
+        });
+    }
+
+    public void doCreateTopic(RoutingContext routingContext) {
+        String topicName = routingContext.pathParam("topicname");
+
+        createTopic(topicName, createTopicResult -> {
+            if (createTopicResult.succeeded()) {
+                JsonObject root = new JsonObject();
+                root.put("name", topicName);
+                HttpUtils.sendResponse(routingContext, HttpResponseStatus.OK.code(), BridgeContentType.KAFKA_JSON, root.toBuffer());
+            } else {
+                HttpBridgeError error = new HttpBridgeError(
+                        HttpResponseStatus.INTERNAL_SERVER_ERROR.code(),
+                        createTopicResult.cause().getMessage()
                 );
                 HttpUtils.sendResponse(routingContext, HttpResponseStatus.INTERNAL_SERVER_ERROR.code(),
                         BridgeContentType.KAFKA_JSON, error.toJson().toBuffer());
