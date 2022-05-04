@@ -572,6 +572,49 @@
                 }
             ]
         },
+
+        "/topicAdmin/{topicname}": {
+            "post": {
+                "tags": [
+                    "Topic",
+                ],
+                "description": "Creates a new topic",
+                "operationId": "createTopic",
+                "requestBody": {
+                    "content": {
+                        "application/vnd.kafka.json.v2+json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/CreateTopicRequest"
+                            }
+                        }
+                    },
+                    "required": false
+                },
+                "responses": {
+                    "200": {
+                        "description": "Topic created successfully.",
+                        "content": {
+                            "application/vnd.kafka.v2+json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/CreateTopicResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "parameters": [
+                {
+                    "name": "topicname",
+                    "in": "path",
+                    "description": "Name of the topic.",
+                    "required": true,
+                    "schema": {
+                        "type": "string"
+                    }
+                }
+            ]
+        },
         "/topics": {
             "get": {
                 "tags": [
@@ -1835,6 +1878,32 @@
                             "value": "value2"
                         }
                     ]
+                }
+            },
+            "CreateTopicRequest": {
+                "title": "CreateTopicRequest",
+                "type": "object",
+                "properties": {
+                    "numPartitions": {
+                        "description": "Number of partitions",
+                        "format": "int32",
+                        "type": "integer"
+                    },
+                    "replicationFactor": {
+                        "description": "Replication factor",
+                        "format": "int32",
+                        "type": "integer"
+                    }
+                }
+            },
+            "CreateTopicResponse": {
+                "title": "CreateTopicResponse",
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "description": "Name of the topic",
+                        "type": "string"
+                    }
                 }
             },
             "Topics": {

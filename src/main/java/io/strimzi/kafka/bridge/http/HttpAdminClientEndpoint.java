@@ -111,7 +111,18 @@ public class HttpAdminClientEndpoint extends AdminClientEndpoint {
     public void doCreateTopic(RoutingContext routingContext) {
         String topicName = routingContext.pathParam("topicname");
 
-        createTopic(topicName, createTopicResult -> {
+        JsonObject requestJsonObject = routingContext.getBody() != null && routingContext.getBody().length() != 0 ? routingContext.getBodyAsJson() : new JsonObject();
+
+        Integer numPartitions = requestJsonObject.getInteger("numPartitions");
+        if (numPartitions == null) {
+            numPartitions = 1;
+        }
+        Integer replicationFactor = requestJsonObject.getInteger("replicationFactor");
+        if (replicationFactor == null) {
+            replicationFactor = 1;
+        }
+
+        createTopic(topicName, numPartitions, replicationFactor, createTopicResult -> {
             if (createTopicResult.succeeded()) {
                 JsonObject root = new JsonObject();
                 root.put("name", topicName);
