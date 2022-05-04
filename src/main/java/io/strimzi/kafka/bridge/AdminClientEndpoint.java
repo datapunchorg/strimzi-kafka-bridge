@@ -10,13 +10,22 @@ import io.strimzi.kafka.bridge.config.KafkaConfig;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
-import io.vertx.kafka.admin.*;
+import io.vertx.kafka.admin.Config;
+import io.vertx.kafka.admin.KafkaAdminClient;
+import io.vertx.kafka.admin.ListOffsetsResultInfo;
+import io.vertx.kafka.admin.NewTopic;
+import io.vertx.kafka.admin.OffsetSpec;
+import io.vertx.kafka.admin.TopicDescription;
 import io.vertx.kafka.client.common.ConfigResource;
 import io.vertx.kafka.client.common.TopicPartition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
+import java.util.Properties;
+import java.util.Set;
 
 /**
  * Base class for admin client endpoint
